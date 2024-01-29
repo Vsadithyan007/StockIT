@@ -1,0 +1,42 @@
+{% extends 'partials/base.html' %}
+
+{% block title %}View Orders{% endblock %}
+{% block content %}
+{% include 'partials/topnav.html' %}
+<div class="container">
+    <div class="row my-4">
+        <div class="col-md-4 ce">
+            
+        </div>
+
+        <div class="col-md-8">
+            <table class="table bg-white">
+                <thead class="bg-primary">
+                    <tr class="text-white">
+                        <th scope="col">#</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Order by</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for o in orders %}
+                    <tr>
+                        <th scope="row">{{o.id}}</th>
+                        <td>{{o.product}}</td>
+                        <td>{{o.product.Category}}</td>
+                        <td>{{o.o_qty}}</td>
+                        <td>
+                            {{o.staff.username}}
+                        </td>
+                        <td>{{o.date}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>            
+{% endblock %}

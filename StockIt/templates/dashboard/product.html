@@ -1,0 +1,60 @@
+{% extends 'partials/base.html' %}
+{% block title %}Product Page{% endblock %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+{% include 'partials/topnav.html' %}
+<div class="container">
+    <div class="row my-4">
+        <div class="col-md-4">
+            {% for msg in messages%}
+            {% if msg %}
+            <div class="alert alert-{{ msg.tags }}">
+                {{ msg }}
+            </div>
+            {% endif %}
+            {% endfor %}
+            <div class="border bg-white p-3">
+                <h4 class="text-success text-center">Add Products</h4>
+                <hr>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="d-grid gap-2">
+                        <input class="btn btn-success" type="submit" value="Add Product">
+                    </div>   
+                </form>
+            </div>
+        </div>
+        {% load static %}
+        <div class="col-md-8">
+            <table class="table bg-white">
+                <thead class="bg-primary">
+                    <tr class="text-white">
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Activity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for items in items %}
+                    <tr>
+                        <th scope="row">{{items.id}}</th>
+                        <td>{{items.Name}}</td>
+                        <td>{{items.Category}}</td>
+                        <td>{{items.Quantity}}</td>
+                        <td>
+                            <a class="btn btn-outline-primary btn-sm" href="{% url 'product-update' pk=items.pk %}">Edit</a>
+                            <a class="btn btn-outline-danger btn-sm" href="{% url 'product-delete' pk=items.pk %}">Delete</a>
+                        </td>
+                    </tr>
+                     {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+        
+{% endblock %}

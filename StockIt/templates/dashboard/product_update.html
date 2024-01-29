@@ -1,0 +1,25 @@
+{% extends 'partials/base.html' %}
+
+{% block title %}View Orders{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container p-2">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="border bg-white p-3">
+                <h3>Edit Item</h3>
+            <hr>
+            
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <center>
+                <a class="btn btn-outline-secondary" href="/stockit/product/">Cancel</a>
+                <input class="btn btn-outline-success" type="submit" value="Update">
+                </center>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

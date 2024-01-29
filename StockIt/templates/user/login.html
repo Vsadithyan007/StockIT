@@ -1,0 +1,30 @@
+{% extends 'partials/base.html' %}
+{% block title %}Login Page{% endblock %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="row my-4">
+    <div class="col-md-6 offset-md-3">
+        {% for msg in messages%}
+            {% if msg %}
+            <div class="alert alert-{{ msg.tags }}">
+                {{ msg }}
+            </div>
+            {% endif %}
+        {% endfor %}
+        <div class="border p-3 bg-white">
+            <h4>Login Page</h4>
+            <hr>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="d-grid gap-2">
+                    <input class="btn btn-success" type="submit" value="Login" href="stockit/index/">
+                </div>
+                <a class="mx-4" href="{% url 'p_rst' %}">Forgot Password?</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
